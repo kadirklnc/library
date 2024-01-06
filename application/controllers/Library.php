@@ -5,13 +5,27 @@ class Library extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+		$this->load->model("library_model");
+
     }
 
 
 
 	public function index()
-	{
-		$this->load->view('library_view');
+	{		
+		$types = $this->library_model->getAllTypes();
+		$books = $this->library_model->getAllBooks();
+		$authors = $this->library_model->getAllAuthor();
+
+
+		$viewData = new stdClass();
+		$viewData->books = $books;
+		$viewData->types = $types;
+		$viewData->authors = $authors;
+			$this->load->view('library_view', $viewData);
+
+
+
 	}
 	public function save(){
 

@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,16 +85,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div id="body">
 
-	<a href="<?php echo base_url("type")?>"><button>Tür ekle</button></a>	
-	<form action="<?php echo base_url("library/save")?>" method="post">
+	<a href="<?php echo base_url("library")?>"><button>Kitap ekle</button></a>
+	<a href="<?php echo base_url("author")?>"><button>Yazar ekle</button></a>
+	<a href="<?php echo base_url("type")?>"><button>Tür ekle</button></a>
+			<form action="<?php echo base_url("library/save")?>" method="post">
 		<label for="">Kitap Adı:</label> <input type="text" name="name" id=""><br>
-		<label for="">Yazar Adı:</label> <input type="text" name="author" id=""><br>
+		<label for="">Yazar Adı:</label> 
+
+		<select name="author" id="">
+			<?php foreach ($authors as $author) {
+				?>
+				<option value="<?php echo $author->id ?>"><?php echo $author->name?></option>
+				
+				<?php }?>
+		</select><br>
 		<label for="">Kitap türü:</label> 
 		<select name="type" id="">
-  			<option value="Çizgi Roman">Çizgi Roman</option>
-  			<option value="Aksiyon">Aksiyon</option>
- 			 <option value="Roman">Roman</option>
- 			 <option value="Hikaye">Hikaye</option>
+			<?php foreach ($types as $type) {
+				?>
+				<option value="<?php echo $type->id ?>"><?php echo $type->name?></option>
+				
+				<?php }?>
 		</select><br>
 		<label for="">Basım Tarihi:</label> <input type="date" name="publish_date" id=""><br>
 		<label for="">Durum:</label>
@@ -105,6 +118,98 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</form>
 	</div>
 
+	<div>
+		<table border="2px">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Kitap Adı</th>
+					<th>Tür Adı</th>
+					<th>Yazar Adı</th>
+					<th>Basım Tarihi</th>
+					<th>Durum</th>
+					<th>Oluşturulma Tarihi</th>
+				</tr>
+					
+
+			</thead>
+			<tbody>
+				<?php foreach ($books as $book){
+				?>
+
+				<tr>
+	    			<td><?php echo $book->id ?></td>
+	    			<td><?php echo $book->name ?></td>
+	    			<td><?php echo $book->type ?></td>
+	    			<td><?php echo $book->author ?></td>
+	    			<td><?php echo $book->publish_date ?></td>
+	    			<td><?php echo $book->status ==1?"aktif":"pasif" ?></td>
+	    			<td><?php echo $book->createdAt ?></td>
+					
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+
+	</div>
+	<div>
+		<table border="2px">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Tür Adı</th>
+					<th>Durum</th>
+					<th>Oluşturulma Tarihi</th>
+				</tr>
+					
+
+			</thead>
+			<tbody>
+				<?php foreach ($types as $type){
+				?>
+
+				<tr>
+	    			<td><?php echo $type->id ?></td>
+	    			<td><?php echo $type->name ?></td>
+	    			<td><?php echo $type->status ==1?"aktif":"pasif" ?></td>
+	    			<td><?php echo $type->creatediAt ?></td>
+					
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+
+	</div>
+	<div>
+		<table border="2px">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Yazar Adı</th>
+					<th>Yazar Soyadı</th>
+					<th>Durum</th>
+					<th>Oluşturulma Tarihi</th>
+				</tr>
+					
+
+			</thead>
+			<tbody>
+				<?php foreach ($authors as $author){
+				?>
+
+				<tr>
+	    			<td><?php echo $author->id ?></td>
+	    			<td><?php echo $author->name ?></td>
+	    			<td><?php echo $author->surname ?></td>
+	    			<td><?php echo $author->status ==1?"aktif":"pasif" ?></td>
+	    			<td><?php echo $author->createdAt ?></td>
+					
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+
+	</div>
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 

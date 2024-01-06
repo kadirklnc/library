@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class type extends CI_Controller {
+class author extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-		$this->load->model("type_model");
+		$this->load->model("author_model");
 		$this->load->model("library_model");
 
     }
@@ -14,16 +14,17 @@ class type extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('type_view.php');
+		$this->load->view('author_view.php');
 	}
 	public function save(){
 		$data = array(
 			"name" =>$this->input->post("name"),
+			"surname" =>$this->input->post("surname"),
 			"status" =>$this->input->post("status"),
 			
 		);
 
-		$insert = $this->type_model->insert($data);
+		$insert = $this->author_model->insert($data);
 
 		if($insert){
 			echo "bilgiler kaydedildi";
@@ -35,7 +36,6 @@ class type extends CI_Controller {
 		$viewData->books = $books;
 		$viewData->types = $types;
 			$this->load->view('library_view', $viewData);
-
 		}else{
 			echo "kaydedilirken bir hata oluştu";
 		}

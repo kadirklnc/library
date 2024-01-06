@@ -86,9 +86,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<a href="<?php echo base_url("library")?>"><button>Kitap ekle</button></a>
 	<a href="<?php echo base_url("author")?>"><button>Yazar ekle</button></a>
 	<a href="<?php echo base_url("type")?>"><button>Tür ekle</button></a>
-				
-	<form action="<?php echo base_url("type/save")?>" method="post">
-		<label for="">Tür Adı:</label> <input type="text" name="name" id=""><br>
+		
+	<form action="<?php echo base_url("author/save")?>" method="post">
+		<label for="">Adı:</label> <input type="text" name="name" id=""><br>
+		<label for="">Soyadı:</label> <input type="text" name="surname" id=""><br>
 		
 		<label for="">Durum:</label>
 		<label for="">Aktif</label>
